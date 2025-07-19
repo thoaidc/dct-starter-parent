@@ -21,7 +21,7 @@
     <java.version>17</java.version>
     <directory>${project.basedir}/target</directory>
     <profiles.active>dev</profiles.active>
-    <spring-boot.version>${project.parent.version}</spring-boot.version>
+    <spring-boot.version>3.4.5</spring-boot.version>
     <spring-cloud.version>2024.0.2</spring-cloud.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
@@ -46,6 +46,15 @@
   <!-- Manage shared dependency versions -->
   <dependencyManagement>
     <dependencies>
+      <!-- Spring Boot BOM -->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
       <!-- Spring Cloud BOM -->
       <dependency>
         <groupId>org.springframework.cloud</groupId>
