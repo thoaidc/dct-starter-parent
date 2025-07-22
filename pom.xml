@@ -170,6 +170,14 @@
                 <addClasspath>true</addClasspath>
               </manifest>
             </archive>
+
+            <!-- Packaged with all class and custom configuration files and shared resources -->
+            <includes>
+              <include>**/*.class</include>
+              <include>logback/**</include>
+              <include>i18n/**</include>
+              <include>config/**</include>
+            </includes>
           </configuration>
         </plugin>
 
@@ -301,11 +309,30 @@
                   <resource>
                     <!-- Source directory -->
                     <directory>src/main/resources/</directory>
-                    <!-- Enable variable filtering in files -->
+                    <!-- Disable variable filtering in files -->
                     <filtering>true</filtering>
-                    <!-- Only copy .yml files in config directory -->
+                    <!-- Copy only the files specified in directories below. Excluded files below, avoid duplicate -->
+                    <includes>
+                      <include>i18n/*.properties</include>
+                      <include>logback/*.xml</include>
+                    </includes>
+                    <excludes>
+                      <exclude>config/*.yml</exclude>
+                    </excludes>
+                  </resource>
+
+                  <!-- Separate filters for config files -->
+                  <resource>
+                    <!-- Source directory -->
+                    <directory>src/main/resources/</directory>
+                    <!-- Enable variable filtering in files -->
+                    <!-- Maven will scan the copied files and replace variables in the format ${...} -->
+                    <!-- with the corresponding values from pom.xml or .properties configuration file -->
+                    <filtering>true</filtering>
+                    <!-- Copy only the files specified in the directory below -->
                     <includes>
                       <include>config/*.yml</include>
+                      <include>config/*.properties</include>
                     </includes>
                   </resource>
                 </resources>
