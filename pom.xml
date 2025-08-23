@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.dct</groupId>
   <artifactId>starter-parent</artifactId>
   <version>1.0.0</version>
   <name>dct-starter-parent</name>
   <packaging>pom</packaging>
-  <description>Parent project for all DCT Spring Boot modules</description>
+  <description>Parent project for all Spring Boot modules</description>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -40,8 +40,9 @@
     <hibernate.validator.version>8.0.1.Final</hibernate.validator.version>
     <model.mapper.version>3.2.0</model.mapper.version>
     <imageio.webp.version>0.1.6</imageio.webp.version>
-    <jwt.version>0.12.3</jwt.version>
+    <sqlserver.version>12.10.1.jre11</sqlserver.version>
     <mysql.version>8.2.0</mysql.version>
+    <jwt.version>0.12.3</jwt.version>
   </properties>
 
   <!-- Manage shared dependency versions -->
@@ -132,6 +133,12 @@
         <groupId>com.fasterxml.jackson.datatype</groupId>
         <artifactId>jackson-datatype-jsr310</artifactId>
         <version>${jackson.datatype.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.microsoft.sqlserver</groupId>
+        <artifactId>mssql-jdbc</artifactId>
+        <version>${sqlserver.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
