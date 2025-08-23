@@ -206,3 +206,5 @@ Desktop.ini
 /.nx/
 dist/
 /mnt/logs/
+/.idea/
+/opt/logs/

@@ -4,7 +4,7 @@
   <groupId>com.dct</groupId>
   <artifactId>starter-parent</artifactId>
   <version>1.0.0</version>
-  <name>Archetype - DCT starter parent</name>
+  <name>dct-starter-parent</name>
   <packaging>pom</packaging>
   <description>Parent project for all DCT Spring Boot modules</description>
 
@@ -17,7 +17,7 @@
 
   <!-- Shared properties -->
   <properties>
-    <maven.version>3.8.5</maven.version>
+    <maven.version>3.9.11</maven.version>
     <java.version>21</java.version>
     <directory>${project.basedir}/target</directory>
     <profiles.active>dev</profiles.active>
@@ -27,13 +27,14 @@
 
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
-    <maven.clean-plugin.version>3.3.2</maven.clean-plugin.version>
-    <maven.spotless-plugin.version>2.40.0</maven.spotless-plugin.version>
-    <maven.enforcer-plugin.version>3.4.1</maven.enforcer-plugin.version>
-    <maven.compiler-plugin.version>3.12.0</maven.compiler-plugin.version>
+    <maven.clean-plugin.version>3.4.1</maven.clean-plugin.version>
+    <maven.spotless-plugin.version>2.46.1</maven.spotless-plugin.version>
+    <maven.enforcer-plugin.version>3.5.0</maven.enforcer-plugin.version>
+    <maven.compiler-plugin.version>3.14.0</maven.compiler-plugin.version>
     <maven.javadoc-plugin.version>3.6.0</maven.javadoc-plugin.version>
     <maven.resources-plugin.version>3.3.1</maven.resources-plugin.version>
-    <maven.surefire-plugin.version>3.2.5</maven.surefire-plugin.version>
+    <maven.surefire-plugin.version>3.5.3</maven.surefire-plugin.version>
+    <maven.artifact-transfer.version>0.13.1</maven.artifact-transfer.version>
 
     <jackson.datatype.version>2.15.3</jackson.datatype.version>
     <hibernate.validator.version>8.0.1.Final</hibernate.validator.version>
@@ -65,6 +66,18 @@
       </dependency>
 
       <!-- Custom dependencies -->
+      <dependency>
+        <groupId>org.apache.maven.shared</groupId>
+        <artifactId>maven-artifact-transfer</artifactId>
+        <version>${maven.artifact-transfer.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-loader-tools</artifactId>
+        <version>${spring-boot.version}</version>
+      </dependency>
+
       <dependency>
         <groupId>org.hibernate.validator</groupId>
         <artifactId>hibernate-validator</artifactId>
@@ -133,6 +146,26 @@
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-maven-plugin</artifactId>
           <version>${spring-boot.version}</version>
+
+          <dependencies>
+            <dependency>
+              <groupId>org.apache.maven.shared</groupId>
+              <artifactId>maven-artifact-transfer</artifactId>
+              <version>${maven.artifact-transfer.version}</version>
+            </dependency>
+
+            <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-loader-tools</artifactId>
+              <version>${spring-boot.version}</version>
+            </dependency>
+
+            <dependency>
+              <groupId>org.sonatype.plexus</groupId>
+              <artifactId>plexus-build-api</artifactId>
+              <version>0.0.7</version>
+            </dependency>
+          </dependencies>
 
           <configuration>
             <layers>
@@ -252,10 +285,10 @@
                 <version>[${maven.version},)</version>
               </requireMavenVersion>
 
-              <!-- Only allow building with JDK 17 or 21 -->
+              <!-- Only allow building with JDK 21+ -->
               <requireJavaVersion>
-                <message>You are running an incompatible version of Java. Supports JDK 17 or 21</message>
-                <version>[17,18),[21,22)</version>
+                <message>You are running an incompatible version of Java. Supports JDK 21+</message>
+                <version>[21,24]</version>
               </requireJavaVersion>
             </rules>
           </configuration>
